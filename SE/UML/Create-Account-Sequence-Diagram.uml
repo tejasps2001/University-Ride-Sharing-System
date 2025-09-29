@@ -1,0 +1,17 @@
+@startuml
+actor Student
+participant "React UI" as React
+participant "Express API" as Express
+database "MongoDB" as Mongo
+
+Student -> React: Open Create Account form
+Student -> React: Fill in details & upload profile picture
+Student -> React: Click "Create Account"
+React -> Express: POST /api/register (form data)
+Express -> Mongo: Check if email exists
+Mongo --> Express: Email exists? (yes/no)
+Express -> Mongo: Save new user (if unique)
+Mongo --> Express: User saved
+Express -> React: Respond with success/error
+React -> Student: Show success/error message
+@enduml
