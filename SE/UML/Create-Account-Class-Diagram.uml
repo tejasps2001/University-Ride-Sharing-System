@@ -1,0 +1,29 @@
+@startuml
+class Account {
+  - name: String
+  - studentId: String
+  - email: String
+  - password: String
+  - profilePicture: URL
+  + createUser()
+  + verifyEmail()
+  + login()
+}
+
+class Student {
+  + register()
+}
+
+class ExpressAPI {
+  + registerUser()
+}
+
+class MongoDB {
+  + saveUser()
+  + findUserByEmail()
+}
+
+Student --> Account : uses
+ExpressAPI --> Account : creates/verifies
+ExpressAPI --> MongoDB : queries/saves
+@enduml
