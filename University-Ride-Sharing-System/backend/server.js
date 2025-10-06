@@ -31,7 +31,7 @@ app.post('/api/register', async (req, res) => {
   if (!name || !studentId || !email || !password || !profilePicture) {
     return res.status(400).json({ message: 'All fields are required.' });
   }
-  if (!email.endsWith('@university.edu')) {
+  if (!email.endsWith('@uohyd.ac.in')) {
     return res.status(400).json({ message: 'Only university email addresses are allowed.' });
   }
   try {

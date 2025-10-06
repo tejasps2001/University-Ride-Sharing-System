@@ -35,10 +35,10 @@ const Register = () => {
       return;
     }
     setLoading(true);
-    try {
-      // Simulate file upload (in real app, use FormData and backend support)
-      const reader = new FileReader();
-      reader.onloadend = async () => {
+    // Simulate file upload (in real app, use FormData and backend support)
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      try {
         const profilePicture = reader.result;
         const res = await axios.post('http://localhost:5000/api/register', {
           name: form.name,
@@ -48,15 +48,15 @@ const Register = () => {
           profilePicture,
         });
         setSuccess(res.data.message);
-      };
-      reader.readAsDataURL(form.profilePicture);
-    } catch (err) {
-      setError(
-        err.response?.data?.message || 'Registration failed. Please try again.'
-      );
-    } finally {
-      setLoading(false);
-    }
+      } catch (err) {
+        setError(
+          err.response?.data?.message || 'Registration failed. Please try again.'
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+    reader.readAsDataURL(form.profilePicture);
   };
 
   return (

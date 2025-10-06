@@ -19,7 +19,7 @@ describe('POST /api/register', () => {
   const validUser = {
     name: 'Test User',
     studentId: 'S123',
-    email: 'test@university.edu',
+    email: 'test@uohyd.ac.in',
     password: 'password123',
     profilePicture: 'data:image/png;base64,abc',
   };
@@ -44,7 +44,7 @@ describe('POST /api/register', () => {
   });
 
   it('should reject missing required fields', async () => {
-    const res = await request(app).post('/api/register').send({ email: 'missing@university.edu' });
+    const res = await request(app).post('/api/register').send({ email: 'missing@uohyd.ac.in' });
     expect(res.statusCode).toBe(400);
     expect(res.body.message).toMatch(/all fields are required/i);
   });
