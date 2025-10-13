@@ -1,0 +1,72 @@
+@startuml
+title Create Account Activity Diagram (Detailed)
+
+|User|
+start
+:Open Create Account form;
+:Fill in registration details;
+note left
+- Name
+- Student ID
+- University Email
+- Password
+- Confirm Password
+- Profile Picture
+end note
+:Click "Create Account" button;
+
+|React UI|
+:Receive form submission;
+if (Passwords match?) then (yes)
+  if (Profile picture is provided?) then (yes)
+    :Read profile picture as Data URL;
+    :Send registration data to API;
+
+    |Express API|
+    :Receive registration request;
+    if (All required fields are present?) then (yes)
+      if (Email is a valid university email?) then (yes)
+        :Query database for email;
+
+        |MongoDB|
+        :Find user by email;
+        
+        |Express API|
+        if (Email is unique?) then (yes)
+          :Create new user record;
+          
+          |MongoDB|
+          :Save new user to database;
+
+          |Express API|
+          :Return success message (201);
+
+        else (no)
+          :Return "Email already exists" error (400);
+        endif
+      else (no)
+        :Return "Invalid university email" error (400);
+      endif
+    else (no)
+      :Return "All fields are required" error (400);
+    endif
+
+    |React UI|
+    :Receive API response;
+    if (Registration is successful?) then (yes)
+      :Display success message;
+    else (no)
+      :Display error message;
+    endif
+  else (no)
+   :Display "Profile picture is required" error;
+  endif
+else (no)
+  :Display "Passwords do not match" error;
+endif
+
+|User|
+:View success or error message;
+stop
+
+@enduml

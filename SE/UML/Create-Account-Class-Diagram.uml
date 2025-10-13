@@ -1,29 +1,42 @@
 @startuml
+title Create Account Class Diagram (Layered)
+
+skinparam classAttributeIconSize 0
+
 class Account {
   - name: String
   - studentId: String
   - email: String
   - password: String
-  - profilePicture: URL
-  + createUser()
-  + verifyEmail()
-  + login()
+  - profilePicture: String
 }
 
-class Student {
-  + register()
+class AccountController {
+  + registerUser(userData)
 }
 
-class ExpressAPI {
-  + registerUser()
+class AccountService {
+  + createUser(accountData: Account)
+  + verifyEmail(email: String)
 }
 
-class MongoDB {
-  + saveUser()
-  + findUserByEmail()
+class AccountRepository {
+  + saveUser(user: Account): Account
+  + findUserByEmail(email: String): Account
 }
 
-Student --> Account : uses
-ExpressAPI --> Account : creates/verifies
-ExpressAPI --> MongoDB : queries/saves
+AccountController ..> AccountService : uses
+AccountService ..> AccountRepository : uses
+AccountService ..> Account : creates
+AccountRepository ..> Account : manages
+
+note top of AccountController
+  Handles incoming API requests (e.g., from Express).
+  Delegates business logic to the Service layer.
+end note
+
+note top of AccountService
+  Contains the core business logic for account creation and verification.
+end note
+
 @enduml
