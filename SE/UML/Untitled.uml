@@ -5681,7 +5681,7 @@
 <XPD:REF name="Associations[1]">9Qx6K017TUK3O9Ohy7WggQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[8]" type="UMLUseCase" guid="7ymGZSS3ZUOH4o23rn/V6AAA">
-<XPD:ATTR name="Name" type="string">Chat with rider/driver</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Chat with c/driver</XPD:ATTR>
 <XPD:REF name="Namespace">P6/F0CG3EEuuwcZXjZ5jTAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">CO48/SMkhkq4J+9xVvOcawAA</XPD:REF>
